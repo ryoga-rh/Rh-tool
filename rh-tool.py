@@ -5,25 +5,71 @@ import time
 import pytube
 import socket
 import webbrowser
+import signal
 from colorama import *
+
+def ctrlc(signal, freame):
+    limpiar()
+    logo()
+    print(Fore.RED+"Precionaste ctrl c, el proceso termino, saliendo...")
+    time.sleep(2)
+    salida()
+
+signal.signal(signal.SIGINT, ctrlc)
 
 def limpiar():
     os.system("cls || clear")
     
 def logo():
-    limpiar()
     print(f'''
-                                                                                   
-{Fore.GREEN} 88888888ba  {Fore.CYAN} 88        88      {Fore.YELLOW}888888888888                           {Fore.RED} 88  
-{Fore.GREEN} 88      "8b {Fore.CYAN} 88        88      {Fore.YELLOW}     88                                {Fore.RED} 88  
-{Fore.GREEN} 88      ,8P {Fore.CYAN} 88        88      {Fore.YELLOW}     88                                {Fore.RED} 88  
-{Fore.GREEN} 88aaaaaa8P' {Fore.CYAN} 88aaaaaaaa88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}     ,adPPYba,  {Fore.WHITE}  ,adPPYba,  {Fore.RED} 88  
-{Fore.GREEN} 88""""88'   {Fore.CYAN} 88""""""""88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}    a8"     "8a {Fore.WHITE} a8"     "8a {Fore.RED} 88  
-{Fore.GREEN} 88    `8b   {Fore.CYAN} 88        88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}    8b       d8 {Fore.WHITE} 8b       d8 {Fore.RED} 88  
-{Fore.GREEN} 88     `8b  {Fore.CYAN} 88        88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}    "8a,   ,a8" {Fore.WHITE} "8a,   ,a8" {Fore.RED} 88  
-{Fore.GREEN} 88      `8b {Fore.CYAN} 88        88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}     `"YbbdP"'  {Fore.WHITE}  `"YbbdP"'  {Fore.RED} 88  
-          ''')
-    
+{Fore.GREEN}██                  {Fore.CYAN} 
+{Fore.GREEN}████████╗{Fore.CYAN}░███╗░░███╗ {Fore.YELLOW} █████████╗{Fore.LIGHTMAGENTA_EX}░█████╗{Fore.WHITE}░░█████╗{Fore.RED}░███╗░░░░░
+{Fore.GREEN} ██╔══██╗  {Fore.CYAN}██║░░██║   {Fore.YELLOW} ╚══██╔══╝{Fore.LIGHTMAGENTA_EX}██╔══██╗{Fore.WHITE}██╔══██╗{Fore.RED}░██║░░░░░ 
+{Fore.GREEN} ██████╔╝  {Fore.CYAN}███████║   {Fore.YELLOW} ░░░██║{Fore.LIGHTMAGENTA_EX}░░░██║░░██║{Fore.WHITE}██║░░██║{Fore.RED}░██║░░░░░
+{Fore.GREEN} ██╔══██╗  {Fore.CYAN}██╔══██║   {Fore.YELLOW} ░░░██║{Fore.LIGHTMAGENTA_EX}░░░██║░░██║{Fore.WHITE}██║░░██║{Fore.RED}░██║░░░░░
+{Fore.GREEN}██║░░░██║ {Fore.CYAN} ██║░░██║   {Fore.YELLOW} ░░░██║{Fore.LIGHTMAGENTA_EX}░░░╚█████╔╝{Fore.WHITE}╚█████╔╝{Fore.RED}░███████╗ 
+{Fore.GREEN}╚═╝░░░╚═╝  {Fore.CYAN}╚═╝░░╚═╝   {Fore.YELLOW} ░░░╚═╝{Fore.LIGHTMAGENTA_EX}░░░░╚════╝{Fore.WHITE}░░╚════╝{Fore.RED}░░╚══════╝
+        ''')
+
+def menu():
+    limpiar()
+    logo()
+    print(f'''{Fore.BLUE}
+Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GREEN}
+╔════════╦══════════╦════════════════════════════════════════════╗
+║ Numero ║ Opciones ║ Descripción                                ║
+╠════════╬══════════╬════════════════════════════════════════════╣
+║ 1      ║ Sistema  ║ Muestra algunas configuraciones de sistema ║
+║ 2      ║ IP       ║ Muestra la información de una IP           ║
+║ 3      ║ Youtube  ║ Descargar videos de Yutube                 ║
+║ 4      ║ Salir    ║ Salir de esta pequeña herramienta          ║
+╚════════╩══════════╩════════════════════════════════════════════╝
+         {Fore.RESET} ''')
+    selccion = input(f'{Fore.CYAN} Selecciona una opcion: {Fore.RESET}')
+    if selccion == "1":
+        print(f'{Fore.BLUE}Estoy trabajando en esa opcion xD')
+        time.sleep(2)
+        menu()
+    elif selccion == "2":
+        print(f'{Fore.BLUE}En un momento se cargara la opcion{Fore.RESET}')
+        time.sleep(2)
+        ip()
+    elif selccion == "3":
+        print(f'{Fore.BLUE}Estoy trabajando en esa opcion xD')
+        time.sleep(2)
+        menu()
+    elif selccion == "4":
+        print(f'{Fore.BLACK} Saliendo...{Fore.RESET}')
+        time.sleep(2)
+        salida()
+def salida():
+    limpiar()
+    logo()
+    print(f'{Fore.YELLOW} Gracias por usar la herramienta, saliendo...{Fore.RESET}')
+    time.sleep(3)
+    limpiar()
+    sys.exit()
+
 def ip():
     limpiar()
     logo()
@@ -38,4 +84,57 @@ def ip():
 │  organización y horario          │      código postal    │ anteriores│
 └──────────────────────────────────┴───────────────────────────────────┘
           {Fore.RESET}''')
-ip()
+    x = input(Fore.RED+"Selecciona una opcion: "+Fore.RESET)
+    if x == "1":
+        print(Fore.GREEN+"En un momento se abrira en tu naegador la pagina"+Fore.RESET)
+        webbrowser.open(f'https://check-host.net/ip-info?host={ip1}')
+        time.sleep(3)
+        y = init()(Fore.YELLOW+"El proceso termino, que es lo que quieres hacer?\n1.-Volver al menu \n2.-Salir"+Fore.RESET)
+        if y == "1":
+            print(f'{Fore.GREEN} Volviendo al menu... {Fore.RESET}')
+            time.sleep(3)
+            menu()
+        elif y == "2":
+            print(f'{Fore.GREEN} Saliendo... {Fore.RESET}')
+            time.sleep(3)
+            salida()
+        else: 
+            print(Fore.RED+"Opcion no valida, volviendo al menu..."+Fore.RESET)
+            time.sleep(3)
+            menu()
+    elif x == "2":
+        print(Fore.GREEN+"En un momento se abrira en tu navegador la pagina"+Fore.RESET)
+        webbrowser.open(f'https://es.infobyip.com/ip-{ip1}.html')
+        time.sleep(3)
+        y = init()(Fore.YELLOW+"El proceso termino, que es lo que quieres hacer?\n1.-Volver al menu \n2.-Salir"+Fore.RESET)
+        if y == "1":
+            print(f'{Fore.GREEN} Volviendo al menu... {Fore.RESET}')
+            time.sleep(3)
+            menu()
+        elif y == "2":
+            print(f'{Fore.GREEN} Saliendo... {Fore.RESET}')
+            time.sleep(3)
+            salida()
+        else: 
+            print(Fore.RED+"Opcion no valida, volviendo al menu..."+Fore.RESET)
+            time.sleep(3)
+            menu()
+    elif x == "3":
+        print(Fore.GREEN+"En un momento se abriran en tu navegador las pagins"+Fore.RESET)
+        webbrowser.open(f'https://check-host.net/ip-info?host={ip1}')   
+        webbrowser.open(f'https://es.infobyip.com/ip-{ip1}.html')
+        time.sleep(3)
+        y = init()(Fore.YELLOW+"El proceso termino, que es lo que quieres hacer?\n1.-Volver al menu \n2.-Salir"+Fore.RESET)
+        if y == "1":
+            print(f'{Fore.GREEN} Volviendo al menu... {Fore.RESET}')
+            time.sleep(3)
+            menu()
+        elif y == "2":
+            print(f'{Fore.GREEN} Saliendo... {Fore.RESET}')
+            time.sleep(3)
+            salida()
+        else: 
+            print(Fore.RED+"Opcion no valida, volviendo al menu..."+Fore.RESET)
+            time.sleep(3)
+            menu()
+menu()
