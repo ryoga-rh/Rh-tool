@@ -4,6 +4,7 @@ import sys
 import time
 import pytube
 import socket
+import webbrowser
 from colorama import *
 
 def limpiar():
@@ -11,7 +12,6 @@ def limpiar():
     
 def logo():
     limpiar()
-    print(Fore.RED)
     print(f'''
                                                                                    
 {Fore.GREEN} 88888888ba  {Fore.CYAN} 88        88      {Fore.YELLOW}888888888888                           {Fore.RED} 88  
@@ -23,8 +23,19 @@ def logo():
 {Fore.GREEN} 88     `8b  {Fore.CYAN} 88        88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}    "8a,   ,a8" {Fore.WHITE} "8a,   ,a8" {Fore.RED} 88  
 {Fore.GREEN} 88      `8b {Fore.CYAN} 88        88      {Fore.YELLOW}     88   {Fore.LIGHTMAGENTA_EX}     `"YbbdP"'  {Fore.WHITE}  `"YbbdP"'  {Fore.RED} 88  
           ''')
-    print(Fore.RESET)
     
-logo(
-    
-)
+def ip():
+    limpiar()
+    logo()
+    ip1 = input(Fore.YELLOW+"Introduce una ip: "+Fore.RESET)
+    time.sleep(2)
+    print(f'''{Fore.CYAN}
+┌──────────────────────────────────┬───────────────────────────────────┐
+│          1.-CheckHost            │   2.-Infobyip         │    3      │
+├──────────────────────────────────┼───────────────────────┼───────────│
+│  Muestra localización            │  Muestra localización │  Todas    │
+│  proveedor, rango, código postal │       proveedor       │   las     │
+│  organización y horario          │      código postal    │ anteriores│
+└──────────────────────────────────┴───────────────────────────────────┘
+          {Fore.RESET}''')
+ip()
