@@ -58,9 +58,9 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
         time.sleep(2)
         ip()
     elif selccion == "3":
-        print(f'{Fore.BLUE}Estoy trabajando en esa opcion xD')
+        print(f'{Fore.BLUE}En un momento se cargara la opcion{Fore.RESET}')
         time.sleep(2)
-        menu()
+        yt()
     elif selccion == "4":
         print(f'{Fore.BLACK} Saliendo...{Fore.RESET}')
         time.sleep(2)
@@ -206,6 +206,41 @@ def sistema():
             time.sleep(2)
             menu()
         
+def yt():
+    limpiar()
+    logo()
+    url = input(Fore.GREEN+"Da un link: "+Fore.RESET)
+    yt = pytube.YouTube(url)
+    print(Fore.GREEN+"Nombre del video: "+Fore.YELLOW+yt.title)
+    print(Fore.GREEN+"Duracion: "+Fore.YELLOW, yt.length)
+    x = input(Fore.RED+"Estas seguro que quieres descargar el video? si/no \n"+Fore.RESET)
+    if x == "si":
+        video = yt.streams.first()
+        video.download()
+    elif x == "no":
+        print("Volviendo al menu")
+        time.sleep(3)
+        menu()
+    else:
+        print(Fore.RED+"Opcion no valida, volviendo al menu"+Fore.RESET)
+        time.sleep(3)
+        menu()
+    time.sleep(4)
+    termino = input(Fore.YELLOW+"El proceso termino que deseas hacer?"+ Fore.GREEN+"\n 1.- Volver al menu \n 2.- Salir: "+Fore.RESET)
+    if termino == "1":
+        print(Fore.GREEN+"Volviendo al menu..."+Fore.RESET)
+        time.sleep(2)
+        menu()
+    elif termino == "2":
+        print(Fore.RED+"Saliendo..."+Fore.RESET)
+        time.sleep(2)
+        salida()
+    else:
+        print(Fore.RED+"Eleccion no valida, volviendo al menu..."+Fore.RESET)
+        time.sleep(2)    
+        menu()
+    
+
 
 def ip():
     limpiar()
