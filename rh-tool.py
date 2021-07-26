@@ -58,9 +58,9 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
         time.sleep(2)
         ip()
     elif selccion == "3":
-        print(f'{Fore.BLUE}En un momento se cargara la opcion{Fore.RESET}')
-        time.sleep(2)
-        yt()
+        print(f'{Fore.BLUE}Por alguna razon (que no se cual es) tiene un error, cuando lo tenga listo cargara la opcion, volviendo al menu{Fore.RESET}')
+        time.sleep(5)
+        menu()
     elif selccion == "4":
         print(f'{Fore.BLACK} Saliendo...{Fore.RESET}')
         time.sleep(2)
@@ -213,11 +213,11 @@ def yt():
     url = input("Da un link: ")
     print(Fore.RESET)
     adescargar = pytube.YouTube(url)
-    print(f'{Fore.GREEN}Nombre del video:{Fore.YELLOW}  {adescargar.title}')
-    print(f'{Fore.GREEN}Duracion: {Fore.YELLOW} {adescargar.length}')
+    video = adescargar.streams().first()
+    print(f'{Fore.GREEN}Nombre del video:{Fore.YELLOW}  {video.title}')
+    print(f'{Fore.GREEN}Duracion: {Fore.YELLOW} {video.length}')
     x = input(Fore.RED+"Estas seguro que quieres descargar el video? si/no \n"+Fore.RESET)
     if x == "si":
-        video = yt.streams.first()
         video.download()
     elif x == "no":
         print("Volviendo al menu")
