@@ -211,8 +211,8 @@ def yt():
     logo()
     url = input(f'{Fore.GREEN}Da un link {Fore.RESET}')
     adescargar = pytube.YouTube(url)
-    #print(f'{Fore.GREEN}Nombre del video:{Fore.YELLOW}  {adescargar.title}')
-    #print(f'{Fore.GREEN}Duracion: {Fore.YELLOW} {adescargar.length}')
+    print(f'{Fore.GREEN}Nombre del video:{Fore.YELLOW}  {adescargar.title}')
+    print(f'{Fore.GREEN}Duracion: {Fore.YELLOW} {adescargar.length}')
     x = input(Fore.RED+"Estas seguro que quieres descargar el video? si/no \n"+Fore.RESET)
     if x == "si":
         video = yt.streams.first()
