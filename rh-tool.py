@@ -58,9 +58,9 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
         time.sleep(2)
         ip()
     elif selccion == "3":
-        print(f'{Fore.BLUE}Por alguna razon (que no se cual es) tiene un error, cuando lo tenga listo cargara la opcion, volviendo al menu{Fore.RESET}')
+        print(f'{Fore.BLUE}En un momento se cargara la opcion{Fore.RESET}')
         time.sleep(5)
-        menu()
+        yt()
     elif selccion == "4":
         print(f'{Fore.BLACK} Saliendo...{Fore.RESET}')
         time.sleep(2)
@@ -212,37 +212,41 @@ def yt():
     print(Fore.GREEN)
     url = input("Da un link: ")
     print(Fore.RESET)
-    adescargar = pytube.YouTube(url)
-    video = adescargar.streams().first()
-    print(f'{Fore.GREEN}Nombre del video:{Fore.YELLOW}  {video.title}')
-    print(f'{Fore.GREEN}Duracion: {Fore.YELLOW} {video.length}')
-    x = input(Fore.RED+"Estas seguro que quieres descargar el video? si/no \n"+Fore.RESET)
-    if x == "si":
-        video.download()
-    elif x == "no":
-        print("Volviendo al menu")
-        time.sleep(3)
+    try:
+        adescargar = pytube.YouTube(url)
+        video = adescargar.streams().first()
+        print(f'{Fore.GREEN}Nombre del video:{Fore.YELLOW}  {video.title}')
+        print(f'{Fore.GREEN}Duracion: {Fore.YELLOW} {video.length}')
+        x = input(Fore.RED+"Estas seguro que quieres descargar el video? si/no \n"+Fore.RESET)
+        if x == "si":
+            video.download()
+        elif x == "no":
+            print("Volviendo al menu")
+            time.sleep(3)
+            menu()
+        else:
+            print(Fore.RED+"Opcion no valida, volviendo al menu"+Fore.RESET)
+            time.sleep(3)
+            menu()
+        time.sleep(4)
+        termino = input(Fore.YELLOW+"El proceso termino que deseas hacer?"+ Fore.GREEN+"\n 1.- Volver al menu \n 2.- Salir: "+Fore.RESET)
+        if termino == "1":
+            print(Fore.GREEN+"Volviendo al menu..."+Fore.RESET)
+            time.sleep(2)
+            menu()
+        elif termino == "2":
+            print(Fore.RED+"Saliendo..."+Fore.RESET)
+            time.sleep(2)
+            salida()
+        else:
+            print(Fore.RED+"Eleccion no valida, volviendo al menu..."+Fore.RESET)
+            time.sleep(2)    
+            menu()
+    except: 
+        print(f'{Fore.RED}Sucedio un error, puede ser por que el link es erroneo o por que error del paquete{Fore.RESET}')
+        print("Volviendo al menu...")
+        time.sleep(5)
         menu()
-    else:
-        print(Fore.RED+"Opcion no valida, volviendo al menu"+Fore.RESET)
-        time.sleep(3)
-        menu()
-    time.sleep(4)
-    termino = input(Fore.YELLOW+"El proceso termino que deseas hacer?"+ Fore.GREEN+"\n 1.- Volver al menu \n 2.- Salir: "+Fore.RESET)
-    if termino == "1":
-        print(Fore.GREEN+"Volviendo al menu..."+Fore.RESET)
-        time.sleep(2)
-        menu()
-    elif termino == "2":
-        print(Fore.RED+"Saliendo..."+Fore.RESET)
-        time.sleep(2)
-        salida()
-    else:
-        print(Fore.RED+"Eleccion no valida, volviendo al menu..."+Fore.RESET)
-        time.sleep(2)    
-        menu()
-    
-
 
 def ip():
     limpiar()
