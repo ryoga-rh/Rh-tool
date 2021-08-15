@@ -1,3 +1,4 @@
+import requests
 import colorama 
 import os 
 import sys
@@ -45,7 +46,8 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
 ║ 1      ║ Sistema  ║ Muestra algunas configuraciones de sistema ║
 ║ 2      ║ IP       ║ Muestra la información de una IP           ║
 ║ 3      ║ Youtube  ║ Descargar videos de Youtube                ║
-║ 4      ║ Salir    ║ Salir de esta pequeña herramienta          ║
+║ 4      ║ Clonar   ║ Clona el archivo html de una pagina        ║
+║ 5      ║ Salir    ║ Salir de esta pequeña herramienta          ║
 ╚════════╩══════════╩════════════════════════════════════════════╝
          {Fore.RESET} ''')
     selccion = input(f'{Fore.CYAN} Selecciona una opcion: {Fore.RESET}')
@@ -317,5 +319,24 @@ def ip():
             print(Fore.RED+"Opcion no valida, volviendo al menu..."+Fore.RESET)
             time.sleep(3)
             menu() 
-            
-menu()
+      
+def clonar():
+    limpiar()
+    logo()
+    pagina = input(f' {Fore.YELLOW} Da un link: {Fore.RESET} ')
+    if not pagina:
+        print(f' {Fore.RED} Debes que dar un link {Fore.RESET} ') 
+    dato = input(f' {Fore.BLUE} Da un dato a buscar: {Fore:RESET}')
+    if not dato:
+        print(f' {Fore.RED}Debes que dar un dato a buscar: ') 
+    res = requests.get(pagina, dato = { 'search': datos})
+    try:
+        res.raise_for_status()
+        with open('Resultado.hmtl', 'wb') as fb:
+            for chunk in res.iter_content(chunk_size=50000):
+                fb.write(chunk)
+    except:
+        print(f' {Fore.RED} Sucedio un error al intentar copiar el archivo html, revisa si el link es valido {Fore.RESET} ')
+    
+
+clonar()
