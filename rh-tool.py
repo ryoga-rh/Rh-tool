@@ -64,9 +64,21 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
         time.sleep(5)
         yt()
     elif selccion == "4":
+        print(f'{Fore.BLUE}En un momento se cargara la opcion{Fore.RESET}')
+        time.sleep(5)
+        clonar()
+    elif selccion == "5":
         print(f'{Fore.BLACK} Saliendo...{Fore.RESET}')
-        time.sleep(2)
+        time.sleep(3)
         salida()  
+    elif not selccion:
+        print(f'{Fore.RED}Da una opcion{Fore.RESET}')
+        time.sleep(3)
+        menu()
+    else:
+        print(f'{Fore.RED}Debes que dar una opcion valida{Fore.RESET}')
+        time.sleep(3)
+        menu()
 
 def salida():
     limpiar()
@@ -339,4 +351,4 @@ def clonar():
         print(f' {Fore.RED} Sucedio un error al intentar copiar el archivo html, revisa si el link es valido {Fore.RESET} ')
     
 
-clonar()
+menu()
