@@ -338,15 +338,28 @@ def clonar():
     pagina = input(f' {Fore.YELLOW} Da un link: {Fore.RESET} ')
     if not pagina:
         print(f' {Fore.RED} Debes que dar un link {Fore.RESET} ') 
-    dato = input(f' {Fore.BLUE} Da un dato a buscar: {Fore:RESET}')
-    if not dato:
-        print(f' {Fore.RED}Debes que dar un dato a buscar: ') 
-    res = requests.get(pagina, dato = { 'search': datos})
+    res = requests.get(pagina)
     try:
         res.raise_for_status()
-        with open('Resultado.hmtl', 'wb') as fb:
+        with open('Resultado.html', 'wb') as fb:
             for chunk in res.iter_content(chunk_size=50000):
                 fb.write(chunk)
+        time.sleep(2)
+        print(f'{Fore.GREEN}Listo, se copio el archivo html de la pagina {pagina}')
+        time.sleep(1)
+        termino = input(Fore.YELLOW+"El proceso termino que deseas hacer?"+ Fore.GREEN+"\n 1.- Volver al menu \n 2.- Salir: "+Fore.RESET)
+        if termino == "1":
+            print(Fore.GREEN+"Volviendo al menu..."+Fore.RESET)
+            time.sleep(2)
+            menu()
+        elif termino == "2":
+            print(Fore.RED+"Saliendo..."+Fore.RESET)
+            time.sleep(2)
+            salida()
+        else:
+            print(Fore.RED+"Eleccion no valida, volviendo al menu..."+Fore.RESET)
+            time.sleep(2)    
+            menu()
     except:
         print(f' {Fore.RED} Sucedio un error al intentar copiar el archivo html, revisa si el link es valido {Fore.RESET} ')
     
