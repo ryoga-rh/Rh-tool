@@ -21,7 +21,13 @@ signal.signal(signal.SIGINT, ctrlc)
 
 
 def limpiar():
-    os.system("cls || clear") 
+    if sys.platform == "linux":
+        os.system("clear")
+    elif sys.platform == "win32":
+        os.system("cls")
+    else:
+        os.system("cls || clear")
+        
     
 def logo():
     print(f'''
@@ -35,7 +41,6 @@ def logo():
         ''') 
 
 def menu():
-    os.system("mode con: cols=120 lines=50")
     limpiar()
     logo()
     print(f'''{Fore.BLUE}
