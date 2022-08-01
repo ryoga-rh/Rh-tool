@@ -7,6 +7,7 @@ import pytube
 import socket 
 import webbrowser 
 import signal 
+import psutil
 from colorama import * 
 
 
@@ -52,7 +53,8 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
 ║ 2      ║ IP       ║ Muestra la información de una IP           ║
 ║ 3      ║ Youtube  ║ Descargar videos de Youtube                ║
 ║ 4      ║ Clonar   ║ Clona el archivo html de una pagina        ║
-║ 5      ║ Salir    ║ Salir de esta pequeña herramienta          ║
+║ 5      ║ CPU      ║ Informacion sobre tu CPU                   ║
+║ 6      ║ Salir    ║ Salir de esta pequeña herramienta          ║
 ╚════════╩══════════╩════════════════════════════════════════════╝
          {Fore.RESET} ''')
     selccion = input(f'{Fore.CYAN} Selecciona una opcion: {Fore.RESET}')
@@ -73,6 +75,10 @@ Bienvenido a esta pequeña herramienta, estas son las opciones que tengo{Fore.GR
         time.sleep(5)
         clonar()
     elif selccion == "5":
+        print(f'{Fore.BLUE}En un momento se cargara la opcion{Fore.RESET}')
+        time.sleep(3)
+        cpu() 
+    elif selccion == "6":
         print(f'{Fore.BLACK} Saliendo...{Fore.RESET}')
         time.sleep(3)
         salida()  
@@ -343,8 +349,8 @@ def clonar():
     pagina = input(f' {Fore.YELLOW} Da un link: {Fore.RESET} ')
     if not pagina:
         print(f' {Fore.RED} Debes que dar un link {Fore.RESET} ') 
-    res = requests.get(pagina)
     try:
+        res = requests.get(pagina)
         res.raise_for_status()
         with open('Resultado.html', 'wb') as fb:
             for chunk in res.iter_content(chunk_size=50000):
@@ -368,5 +374,27 @@ def clonar():
     except:
         print(f' {Fore.RED} Sucedio un error al intentar copiar el archivo html, revisa si el link es valido {Fore.RESET} ')
     
-
+def cpu():
+    limpiar()
+    cpu = psutil.cpu_freq()
+    print(Fore.LIGHTGREEN_EX)
+    print("<" + "=" * 39 + " CPU Info " + "=" * 39 + ">")
+    print("#")
+    print(f"# Nucleos Fisicos")
+    print(f"# {psutil.cpu_count(logical= False)}")
+    print(f"#")
+    print(f"# Nucleos Totales")
+    print(f"# {psutil.cpu_count(logical=True)}")
+    print(f"#")
+    print("# Maxima Frecuencia del CPU")
+    print(f"# {cpu.max: .2f}Mhz")
+    print("#")
+    print("# Minima Frecuencia del CPU")
+    print(f"# {cpu.min: .2f}Mhz")
+    print("#")
+    print("# Frecuencia Actual")
+    print(f"# {cpu.current: .2f}Mhz")
+    print("#")
+    print(Fore.RESET)
+    
 menu()
